@@ -1,6 +1,6 @@
 /*
  * How to compile:
- *    g++ solution.cc -g -o solution
+ *    g++ -std=c++11 solution.cc -g -o solution
  */
 
 #include <cstddef>
@@ -104,22 +104,23 @@ namespace network {
 				return ss.str();
 			}
 
-			static vector<string> Tokenize(string str, char delimeter) {
-				vector<string> token_v;
-				size_t start = str.find_first_not_of(delimeter), end = start;
+			static vector<string> Tokenize(string str, char delimiter) {
+				vector<string> tokens;
+				size_t start = str.find_first_not_of(delimiter);
+				size_t end = start;
 
 				while (start != string::npos) {
-					// Find next occurence of delimiter
-					end = str.find(delimeter, start);
+					// Find next occurence of delimiter in |str|.
+					end = str.find(delimiter, start);
 
-					// Push back the token found into vector
-					token_v.push_back(str.substr(start, end - start));
+					// Push back the token found into |tokens|.
+					tokens.push_back(str.substr(start, end - start));
 
-					// Skip all occurences of the delimiter to find new start
-					start = str.find_first_not_of(delimeter, end);
+					// Skip all occurences of the delimiter in |str| to find new |start| position.
+					start = str.find_first_not_of(delimiter, end);
 				}
 
-				return token_v;
+				return tokens;
 			}
 
 			static IpAndPortNumberPair Retrive(const IpAndPortCombinedString& key) {
